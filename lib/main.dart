@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(const MyApp());
@@ -81,8 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 24,
               fit: BoxFit.cover,
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width:100),
             const Expanded(child: SearchBar()),
+            const SizedBox(width: 124), // 24 + 100
           ],
         ),
       ),
@@ -111,11 +113,12 @@ class _SearchBarState extends State<SearchBar> {
           decoration: InputDecoration(
             hintText: 'Search',
             prefixIcon: Icon(
-              Icons.search,
-              color: Theme.of(context).disabledColor,
-            ),
+                CupertinoIcons.search,
+              ),
             hintStyle:Theme.of(context).
-            textTheme.bodyMedium!.copyWith( fontSize: 16, color: Theme.of(context).disabledColor, fontFamily: 'SF-PRO-Text'
+            textTheme.bodyMedium!.copyWith( fontSize: 16, color: Theme.of(context).disabledColor, fontFamily: 'SF-PRO-Text',),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColorDark, width: 2.0  ),
             ),
           ),
         ),
