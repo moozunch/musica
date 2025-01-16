@@ -35,10 +35,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
   // This class is the configuration for the state. It holds the values (in this
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
@@ -89,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Center(
+        child: Expanded(child: SideBar()),
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
       ),
@@ -127,3 +124,71 @@ class _SearchBarState extends State<SearchBar> {
   }
 
 }
+
+class SideBar extends StatefulWidget {
+
+  @override
+  _SideBarState createState() => _SideBarState();
+
+}
+
+class _SideBarState extends State<SideBar> {
+  int activeIndex = 0;
+  //list untuk halaman berupa widget
+  final List<Widget> pages = [
+    Center(child: Text('Home', style: TextStyle(fontSize: 24),),),
+    Center(child: Text('Favorites', style: TextStyle(fontSize: 24),),),
+
+    Center(child: Text('Profile', style: TextStyle(fontSize: 24),),),
+    Center(child: Text('Logout', style: TextStyle(fontSize: 24),),),
+  ];
+
+  //untuk object dan icon
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Row(
+        children: [
+          //SideBar
+          Container(
+            width: 80,
+            color: Theme.of(context).primaryColorDark,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  buildSideBarIcon( //kita buat di di function karena kita mau atur dia kalau ditekan kan aktif dan berubah warna atau bagaimana
+                  CupertinoIcons.home, 0),
+                  SizedBox(height: 20,),
+                  buildSideBarIcon(CupertinoIcons.heart, 1),
+                  SizedBox(height: 20,),
+                  buildSideBarIcon(CupertinoIcons.person, 2),
+                  SizedBox(height: 20,),
+                  buildSideBarIcon(CupertinoIcons.square_arrow_right, 3),
+                  SizedBox(height: 20,),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+
+buildSideBarIcon(IconData icon, int index) {
+  return GestureDetector(
+    onTap: () {
+      setState(() {
+        activeIndex = index;
+      });
+    },
+    child: Column(
+      children: [
+        Icon(icon, color: activeIndex == index 
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).disabledColor)
+      ],
+    ),
+  );
+}}
