@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'widgets/sidebar.dart';
 import 'widgets/searchbar.dart' as searchbar;
-import 'widgets/hugehomedisplay.dart';
+// import 'widgets/hugehomedisplay.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,14 +63,28 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       //SideBar
       body: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            flex: 1, //sidebar width
+          SizedBox( //sizedbox macem container dengan ukuran fix 
+            width: 80, // Sidebar width tetap
             child: SideBar(),
-          ), 
-           Expanded(
+          ),
+          Flexible( //expanded mengambil sisa ruang, jadi saran pakai widget lain seperti Flexible, spacer untuk ngasih ruang kosong
             flex: 1, //sidebar width
-            child: HugeDisplay(),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Container(
+                  width: constraints.maxWidth * 0.6,
+                  child: Column( //wrape in column supaya bisa diatur posisinya, atas especially
+                    crossAxisAlignment: CrossAxisAlignment.start, //supaya dia dikiri, nggak default tengah
+                    children: [
+                      HugeDisplay(),
+                    ],
+                  ),
+                );
+              },
+
+            ),
           ),
         ],
       )
@@ -78,3 +92,32 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+
+class HugeDisplay extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        color:Color.fromARGB(95, 99, 136, 209),
+        height: 300,
+        width: 600,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text('Current Playlist', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).focusColor) ?? TextStyle(color: Theme.of(context).focusColor),  ),
+
+
+              Text('Current Playlist', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).focusColor) ?? TextStyle(color: Theme.of(context).focusColor),  ),
+            ],
+          ),
+          
+
+          
+        ),
+       
+      ),
+    );
+  }
+}
