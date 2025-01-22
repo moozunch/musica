@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'widgets/sidebar.dart';
 import 'widgets/searchbar.dart' as searchbar;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'widgets/hugehomedisplay.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -120,4 +122,13 @@ class HugeDisplay extends StatelessWidget {
       ),
     );
   }
+}
+
+//variable for spotify autentikasi
+class SpotifyAuthService {
+  final String clientId = dotenv.env['CLIENT_ID']!;
+  final String clientSecret = dotenv.env['CLIENT_SECRET']!;
+  final String redirectUri = "http://localhost:8080/callback";
+
+  // Methods as before...
 }
