@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               fit: BoxFit.cover,
             ),
             const SizedBox(width:100),
-            const Expanded(child: searchbar.SearchBar()),
+            const Flexible(child: searchbar.SearchBar()),
             const SizedBox(width: 124), // 24 + 100
           ],
         ),
@@ -129,6 +129,4 @@ class SpotifyAuthService {
   final String clientId = dotenv.env['CLIENT_ID']!;
   final String clientSecret = dotenv.env['CLIENT_SECRET']!;
   final String redirectUri = "http://localhost:8080/callback";
-
-  // Methods as before...
 }
