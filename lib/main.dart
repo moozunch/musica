@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'widgets/sidebar.dart';
 import 'widgets/searchbar.dart' as searchbar;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'widgets/hugehomedisplay.dart';
+import 'widgets/hugehomedisplay.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       //SideBar
-      body: Row(
+      body: Row( 
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox( //sizedbox macem container dengan ukuran fix 
@@ -93,37 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-class HugeDisplay extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        color:Color.fromARGB(95, 99, 136, 209),
-        height: 300,
-        width: 600,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text('Current Playlist', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).focusColor) ?? TextStyle(color: Theme.of(context).focusColor),  ),
-
-
-              Text('Current Playlist', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).focusColor) ?? TextStyle(color: Theme.of(context).focusColor),  ),
-            ],
-          ),
-          
-
-          
-        ),
-       
-      ),
-    );
-  }
-}
-
 //variable for spotify autentikasi
 class SpotifyAuthService {
   final String clientId = dotenv.env['CLIENT_ID']!;
